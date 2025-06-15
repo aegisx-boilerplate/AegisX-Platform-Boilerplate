@@ -24,6 +24,17 @@
     ]
   },
   "dependencies": {
-    "tslib": "^2.3.0"
+    "tslib": "^2.3.0",
+    "knex": "^3.1.0",
+    "fastify-plugin": "^5.0.1"
+  },
+  "peerDependencies": {
+    "mysql2": "^3.6.0",
+    "pg": "^8.11.0",
+    "fastify": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/pg": "^8.11.0",
+    "@types/node": "*"
   }
 }

@@ -22,19 +22,16 @@
   ],
   "references": [
     {
-      "path": "../../libs/core/rbac"
+      "path": "../../libs/features/user-management"
     },
     {
-      "path": "../../libs/core/errors"
-    },
-    {
-      "path": "../../libs/core/database"
+      "path": "../../libs/shared/utils"
     },
     {
       "path": "../../libs/core/config"
     },
     {
-      "path": "../../libs/core/auth"
+      "path": "../../libs/core/database"
     },
     {
       "path": "../../libs/core/logger"

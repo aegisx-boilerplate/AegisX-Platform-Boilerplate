@@ -62,7 +62,32 @@ Plugin สำหรับจำกัดจำนวน requests ด้วย @f
 - `X-RateLimit-Reset` - เวลาที่ reset
 - `Retry-After` - เวลาที่ควรลองใหม่
 
-### 4. Sensible Plugin (`sensible.ts`)
+### 4. Logger Plugin (`logger.ts`)
+
+Plugin สำหรับ logging ด้วย @aegisx/core-logger
+
+#### Features:
+- **Request/Response Logging**: บันทึก HTTP requests และ responses
+- **Error Logging**: บันทึก errors พร้อม stack traces
+- **Structured Logging**: JSON format สำหรับ production
+- **Request Correlation**: unique request IDs สำหรับ tracking
+- **Performance Monitoring**: response times และ metrics
+- **Security-aware**: ไม่บันทึก sensitive data
+
+#### Configuration:
+- **Request Logging**: เปิดใช้งาน incoming request logging
+- **Response Logging**: เปิดใช้งาน outgoing response logging
+- **Error Logging**: เปิดใช้งาน error logging
+- **Include Headers**: ปิดเพื่อความปลอดภัย
+- **Include Body**: ปิดเพื่อความปลอดภัย
+
+#### Excluded Paths:
+- Health checks: `/health`, `/metrics`, `/ping`
+- Swagger docs: `/docs/*`
+- Static files: `/favicon.ico`, `/robots.txt`
+- Assets: `/assets/*`, `/static/*`
+
+### 5. Sensible Plugin (`sensible.ts`)
 
 Plugin เริ่มต้นของ Fastify ที่เพิ่ม utilities และ best practices
 
