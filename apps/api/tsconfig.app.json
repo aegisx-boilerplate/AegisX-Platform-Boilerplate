@@ -22,6 +22,21 @@
   ],
   "references": [
     {
+      "path": "../../libs/core/rbac"
+    },
+    {
+      "path": "../../libs/core/errors"
+    },
+    {
+      "path": "../../libs/core/database"
+    },
+    {
+      "path": "../../libs/core/config"
+    },
+    {
+      "path": "../../libs/core/auth"
+    },
+    {
       "path": "../../libs/core/logger"
     }
   ]
