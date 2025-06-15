@@ -1,0 +1,21 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "target": "es2022",
+    "lib": ["es2022"],
+    "declaration": true,
+    "emitDeclarationOnly": false,
+    "composite": true,
+    "isolatedModules": true,
+    "noEmitOnError": true
+  },
+  "exclude": [
+    "node_modules",
+    "tmp",
+    "apps/web/**/*",
+    "apps/admin/**/*",
+    "apps/*-e2e/**/*"
+  ]
+}

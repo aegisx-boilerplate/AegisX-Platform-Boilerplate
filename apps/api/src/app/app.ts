@@ -1,12 +1,14 @@
 import * as path from 'path';
 import { FastifyInstance } from 'fastify';
 import AutoLoad from '@fastify/autoload';
+import { coreLogger } from '@aegisx/core-logger';
 
 /* eslint-disable-next-line */
-export interface AppOptions {}
+export interface AppOptions { }
 
 export async function app(fastify: FastifyInstance, opts: AppOptions) {
   // Place here your custom code!
+  console.log('Test coreLogger:', coreLogger());
 
   // Do not touch the following lines
 

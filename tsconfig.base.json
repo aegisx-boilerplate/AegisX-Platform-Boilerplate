@@ -1,21 +1,54 @@
 {
+  "compileOnSave": false,
   "compilerOptions": {
-    "composite": true,
+    "baseUrl": ".",
+    "strict": true,
+    "declaration": true,
     "declarationMap": true,
-    "emitDeclarationOnly": true,
     "importHelpers": true,
     "isolatedModules": true,
     "lib": ["es2022"],
-    "module": "nodenext",
-    "moduleResolution": "nodenext",
     "noEmitOnError": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitOverride": true,
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "skipLibCheck": true,
-    "strict": true,
     "target": "es2022",
-    "customConditions": ["development"]
-  }
+    "paths": {
+      "@aegisx/core-auth": ["libs/core/auth/src/index.ts"],
+      "@aegisx/core-config": ["libs/core/config/src/index.ts"],
+      "@aegisx/core-database": ["libs/core/database/src/index.ts"],
+      "@aegisx/core-errors": ["libs/core/errors/src/index.ts"],
+      "@aegisx/core-logger": ["libs/core/logger/src/index.ts"],
+      "@aegisx/core-rbac": ["libs/core/rbac/src/index.ts"],
+      "@aegisx/feature-file-storage": [
+        "libs/features/file-storage/src/index.ts"
+      ],
+      "@aegisx/feature-multi-tenancy": [
+        "libs/features/multi-tenancy/src/index.ts"
+      ],
+      "@aegisx/feature-notifications": [
+        "libs/features/notifications/src/index.ts"
+      ],
+      "@aegisx/feature-user-management": [
+        "libs/features/user-management/src/index.ts"
+      ],
+      "@aegisx/feature-webhooks": ["libs/features/webhooks/src/index.ts"],
+      "@aegisx/feature-websockets": ["libs/features/websockets/src/index.ts"],
+      "@aegisx/integration-minio": ["libs/integrations/minio/src/index.ts"],
+      "@aegisx/integration-rabbitmq": [
+        "libs/integrations/rabbitmq/src/index.ts"
+      ],
+      "@aegisx/integration-redis": ["libs/integrations/redis/src/index.ts"],
+      "@aegisx/shared-constants": ["libs/shared/constants/src/index.ts"],
+      "@aegisx/shared-types": ["libs/shared/types/src/index.ts"],
+      "@aegisx/shared-utils": ["libs/shared/utils/src/index.ts"],
+      "@aegisx/shared-validations": ["libs/shared/validations/src/index.ts"],
+      "@aegisx/ui-components": ["libs/ui/components/src/index.ts"],
+      "@aegisx/ui-icons": ["libs/ui/icons/src/index.ts"],
+      "@aegisx/ui-styles": ["libs/ui/styles/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
 }
