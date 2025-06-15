@@ -3,7 +3,7 @@ import { FastifyInstance } from 'fastify';
 import AutoLoad from '@fastify/autoload';
 import { coreLogger } from '@aegisx/core-logger';
 import { coreAuth } from '@aegisx/core-auth';
-import { coreConfig } from '@aegisx/core-config';
+import { coreConfig, config } from '@aegisx/core-config';
 import { coreDatabase } from '@aegisx/core-database';
 import { coreErrors } from '@aegisx/core-errors';
 import { coreRbac } from '@aegisx/core-rbac';
@@ -20,6 +20,13 @@ export async function app(fastify: FastifyInstance, opts: AppOptions) {
   console.log('coreDatabase:', coreDatabase());
   console.log('coreErrors:', coreErrors());
   console.log('coreRbac:', coreRbac());
+
+  console.log('\n=== Testing Core Config ===');
+  console.log('App Config:', config.get('app'));
+  console.log('Database URL:', config.getDatabaseUrl());
+  console.log('Redis URL:', config.getRedisUrl());
+  console.log('Environment:', config.isDevelopment() ? 'Development' : 'Production');
+  console.log('JWT Config:', config.get('jwt'));
   console.log('=== All Core Libraries Working! ===');
 
   // Do not touch the following lines
