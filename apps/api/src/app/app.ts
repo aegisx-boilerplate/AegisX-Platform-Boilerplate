@@ -18,7 +18,7 @@ export async function app(fastify: FastifyInstance, opts: AppOptions) {
     enableResponseLogging: true,
     enableErrorLogging: true,
     includeHeaders: false,
-    includeBody: false,
+    includeBody: logger.getConfig().isDevelopment() ? true : false,
     excludePaths: ['/health', '/metrics']
   });
 
@@ -60,7 +60,8 @@ export async function app(fastify: FastifyInstance, opts: AppOptions) {
   logger.info('📋 Configuration Summary', configSummary);
   logger.info('✅ All Core Libraries Working!');
 
-  // Example route using Fastify context logger and config
+  // Example route using Fastify context logger and confi
+
   fastify.get('/api/test', async (request, reply) => {
     // ใช้ logger และ config จาก request context
     request.logger.info('Test endpoint accessed', {

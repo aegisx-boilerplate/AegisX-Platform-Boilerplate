@@ -36,7 +36,16 @@ const DEFAULT_OPTIONS: LoggerPluginOptions = {
     logLevel: 'info',
     includeHeaders: false,
     includeBody: false,
-    excludePaths: ['/health', '/metrics']
+    excludePaths: [
+        '/health',
+        '/metrics',
+        '/readiness',
+        '/liveness',
+        '/ping',
+        '/status',
+        '/favicon.ico',
+        '/robots.txt'
+    ]
 };
 
 async function loggerPlugin(
@@ -63,15 +72,15 @@ async function loggerPlugin(
 
     // Request hook - add logger and config to request context
     fastify.addHook('onRequest', async (request: FastifyRequest, reply: FastifyReply) => {
-        // Skip excluded paths
-        if (opts.excludePaths?.includes(request.url)) {
-            return;
-        }
-
-        // Create request-specific logger
+        // Always add logger and config to request context
         request.logger = fastify.createRequestLogger(request);
         request.config = config;
         request.requestId = request.id;
+
+        // Skip logging for excluded paths
+        if (opts.excludePaths?.includes(request.url)) {
+            return;
+        }
 
         // Log incoming request
         if (opts.enableRequestLogging) {
@@ -116,19 +125,25 @@ async function loggerPlugin(
     // Error handler - log errors
     if (opts.enableErrorLogging) {
         fastify.setErrorHandler(async (error, request: FastifyRequest, reply: FastifyReply) => {
-            // Log error with context
-            request.logger.error('💥 Request error', {
-                error: {
-                    message: error.message,
-                    stack: error.stack,
-                    name: error.name,
-                    statusCode: error.statusCode
-                },
-                method: request.method,
-                url: request.url,
-                userAgent: request.headers['user-agent'],
-                ip: request.ip
-            });
+            // Skip error logging for excluded paths
+            if (!opts.excludePaths?.includes(request.url)) {
+                // Ensure request.logger exists, fallback to global logger
+                const requestLogger = request.logger || fastify.createRequestLogger(request);
+
+                // Log error with context
+                requestLogger.error('💥 Request error', {
+                    error: {
+                        message: error.message,
+                        stack: error.stack,
+                        name: error.name,
+                        statusCode: error.statusCode
+                    },
+                    method: request.method,
+                    url: request.url,
+                    userAgent: request.headers['user-agent'],
+                    ip: request.ip
+                });
+            }
 
             // Return appropriate error response
             const statusCode = error.statusCode || 500;
@@ -145,20 +160,21 @@ async function loggerPlugin(
         });
     }
 
-    // Health check endpoint (if not excluded)
-    if (!opts.excludePaths?.includes('/health')) {
-        fastify.get('/health', async (request, reply) => {
+    // Health check endpoint - always available
+    fastify.get('/health', async (request, reply) => {
+        // Use logger only if not in excluded paths
+        if (!opts.excludePaths?.includes('/health')) {
             request.logger.debug('Health check requested');
+        }
 
-            return {
-                status: 'ok',
-                timestamp: new Date().toISOString(),
-                service: request.config.get('app').name,
-                version: request.config.get('app').version,
-                environment: request.config.get('app').environment
-            };
-        });
-    }
+        return {
+            status: 'ok',
+            timestamp: new Date().toISOString(),
+            service: request.config.get('app').name,
+            version: request.config.get('app').version,
+            environment: request.config.get('app').environment
+        };
+    });
 }
 
 // Export as Fastify plugin
