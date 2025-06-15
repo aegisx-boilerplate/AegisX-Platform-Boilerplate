@@ -24,6 +24,11 @@
     ]
   },
   "dependencies": {
-    "tslib": "^2.3.0"
+    "tslib": "^2.3.0",
+    "pino": "^8.17.2",
+    "@aegisx/core-config": "*"
+  },
+  "devDependencies": {
+    "pino-pretty": "^10.3.1"
   }
 }
