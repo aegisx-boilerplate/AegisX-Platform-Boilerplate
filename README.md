@@ -81,8 +81,12 @@ npx create-nx-workspace@21 my-platform --preset=ts --packageManager=pnpm
 
 ## �🔗 Internal Documentation Links
 
+### 🏗️ Development & Setup
+- [**🚀 Workspace Setup Guide**](WORKSPACE_SETUP.md) - **Current workspace structure and development progress**
 - [Authentication Guide](docs/authentication.md) - JWT, RBAC, API Keys, MFA
 - [API Architecture](docs/architecture.md) - System design and patterns
+
+### 🛠️ Implementation Guides  
 - [Multi-Tenancy Implementation](docs/multi-tenancy.md) - Tenant isolation and management
 - [WebSocket Real-time Features](docs/websocket.md) - Real-time communication setup
 - [Webhook Integration](docs/webhook.md) - External system integration

@@ -2,5 +2,69 @@
   "extends": "./tsconfig.base.json",
   "compileOnSave": false,
   "files": [],
-  "references": []
+  "references": [
+    {
+      "path": "./libs/core/database"
+    },
+    {
+      "path": "./libs/core/config"
+    },
+    {
+      "path": "./libs/core/logger"
+    },
+    {
+      "path": "./libs/core/auth"
+    },
+    {
+      "path": "./libs/core/rbac"
+    },
+    {
+      "path": "./libs/core/errors"
+    },
+    {
+      "path": "./libs/shared/types"
+    },
+    {
+      "path": "./libs/shared/utils"
+    },
+    {
+      "path": "./libs/shared/constants"
+    },
+    {
+      "path": "./libs/shared/validations"
+    },
+    {
+      "path": "./libs/features/user-management"
+    },
+    {
+      "path": "./libs/features/multi-tenancy"
+    },
+    {
+      "path": "./libs/features/notifications"
+    },
+    {
+      "path": "./libs/features/file-storage"
+    },
+    {
+      "path": "./libs/features/webhooks"
+    },
+    {
+      "path": "./libs/features/websockets"
+    },
+    {
+      "path": "./libs/integrations/minio"
+    },
+    {
+      "path": "./libs/integrations/redis"
+    },
+    {
+      "path": "./libs/integrations/rabbitmq"
+    },
+    {
+      "path": "./apps/api"
+    },
+    {
+      "path": "./apps/api-e2e"
+    }
+  ]
 }
