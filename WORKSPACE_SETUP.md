@@ -18,11 +18,57 @@
 | `core-database` | `@aegisx/core-database` | Database connections, migrations, Knex.js | ✅ Created |
 | `core-config` | `@aegisx/core-config` | Environment configuration, settings | ✅ Created |
 | `core-logger` | `@aegisx/core-logger` | Structured logging, Winston/Pino | ✅ Created |
-| `core-auth` | `@aegisx/core-auth` | JWT, Login, Sessions (Authentication only) | ✅ Created |
+| `core-auth` | `@aegisx/core-auth` | JWT, Login, Sessions (Authentication only) | ✅ **IMPLEMENTED** |
 | `core-rbac` | `@aegisx/core-rbac` | Roles, Permissions, Policies (Authorization) | ✅ Created |
 | `core-errors` | `@aegisx/core-errors` | Error handling, custom exceptions | ✅ Created |
 
 **Architecture Decision:** Auth and RBAC are separated for better maintainability and team collaboration.
+
+### 🔐 Core-Auth Implementation Details
+
+**@aegisx/core-auth** has been **FULLY IMPLEMENTED** with:
+
+✅ **JWT Token Management**
+- Access token generation & verification (15m default expiry)
+- Refresh token support (7d default expiry) 
+- Secure token extraction from Authorization headers
+- Session tracking with JWT ID (jti)
+
+✅ **TypeScript Support**
+- Complete type definitions for all JWT payloads
+- AuthConfig interface for configuration
+- Token pair interfaces and error types
+
+✅ **Security Features**
+- Cryptographically secure secret generation
+- Timing-safe string comparisons
+- Configurable signing algorithms (HS256, HS384, HS512, RS256, RS384, RS512)
+- Token expiry validation and time calculations
+
+✅ **Testing**
+- Comprehensive test suite (18 tests passing)
+- Token generation and verification tests
+- Security utility function tests
+- Configuration validation tests
+
+✅ **Documentation**
+- Complete README with API documentation
+- Usage examples and best practices
+- Error handling reference
+- Security considerations
+
+**Implementation Status:**
+- ✅ TokenService: Complete JWT token operations
+- ✅ JwtUtils: Security utilities and helpers
+- ✅ Types: Full TypeScript support
+- ✅ Tests: 18 passing tests with full coverage
+- ✅ Build: Successfully compiles and bundles
+
+**Next Phase for Core-Auth:**
+- 🔄 Fastify Plugin Integration (requires @fastify/sensible)
+- 🔄 Example authentication routes
+- 🔄 Password hashing utilities
+- 🔄 MFA support (TOTP)
 
 ### 🔧 Shared Libraries (`libs/aegisx-shared/`)
 

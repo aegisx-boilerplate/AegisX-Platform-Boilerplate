@@ -22,12 +22,6 @@
   ],
   "references": [
     {
-      "path": "../../libs/features/user-management"
-    },
-    {
-      "path": "../../libs/shared/utils"
-    },
-    {
       "path": "../../libs/core/config"
     },
     {

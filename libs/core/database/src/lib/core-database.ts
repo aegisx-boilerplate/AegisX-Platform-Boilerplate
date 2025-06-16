@@ -76,7 +76,7 @@ export abstract class BaseDatabaseConnection implements DatabaseConnection {
 }
 
 export class KnexDatabaseQuery implements DatabaseQuery {
-  constructor(public knex: Knex) { }
+  constructor(public knex: Knex) {}
 
   async execute<T = any>(sql: string, params?: any[]): Promise<QueryResult<T>> {
     const result = await this.knex.raw(sql, params || []);
@@ -89,7 +89,11 @@ export class KnexDatabaseQuery implements DatabaseQuery {
     if (Array.isArray(result)) {
       // MySQL format: [rows, fields]
       data = result[0] || [];
-      if (result[0] && typeof result[0] === 'object' && 'affectedRows' in result[0]) {
+      if (
+        result[0] &&
+        typeof result[0] === 'object' &&
+        'affectedRows' in result[0]
+      ) {
         affectedRows = result[0].affectedRows;
         insertId = result[0].insertId;
       }
@@ -107,7 +111,7 @@ export class KnexDatabaseQuery implements DatabaseQuery {
       data,
       count: data.length,
       affectedRows,
-      insertId
+      insertId,
     };
   }
 
@@ -121,7 +125,9 @@ export class KnexDatabaseQuery implements DatabaseQuery {
     return result.data;
   }
 
-  async transaction<T>(callback: (trx: Knex.Transaction) => Promise<T>): Promise<T> {
+  async transaction<T>(
+    callback: (trx: Knex.Transaction) => Promise<T>
+  ): Promise<T> {
     return await this.knex.transaction(callback);
   }
 }
@@ -130,7 +136,11 @@ export class DatabaseManager {
   private connections: Map<string, DatabaseConnection> = new Map();
   private defaultConnection?: string;
 
-  register(name: string, connection: DatabaseConnection, isDefault = false): void {
+  register(
+    name: string,
+    connection: DatabaseConnection,
+    isDefault = false
+  ): void {
     this.connections.set(name, connection);
     if (isDefault || !this.defaultConnection) {
       this.defaultConnection = name;
@@ -162,13 +172,13 @@ export class DatabaseManager {
 
   async connectAll(): Promise<void> {
     await Promise.all(
-      Array.from(this.connections.values()).map(conn => conn.connect())
+      Array.from(this.connections.values()).map((conn) => conn.connect())
     );
   }
 
   async disconnectAll(): Promise<void> {
     await Promise.all(
-      Array.from(this.connections.values()).map(conn => conn.disconnect())
+      Array.from(this.connections.values()).map((conn) => conn.disconnect())
     );
   }
 
@@ -181,7 +191,7 @@ export class DatabaseManager {
       } catch (error) {
         health[name] = {
           status: 'unhealthy',
-          error: error instanceof Error ? error.message : 'Unknown error'
+          error: error instanceof Error ? error.message : 'Unknown error',
         };
       }
     }
@@ -196,3 +206,8 @@ export class DatabaseManager {
 
 // Singleton instance
 export const databaseManager = new DatabaseManager();
+
+// Legacy function for backward compatibility
+export function coreDatabase(): string {
+  return 'core-database';
+}
