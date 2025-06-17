@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import Fastify from 'fastify';
 import { app } from './app/app';
 import { config } from '@aegisx/core-config';
@@ -21,14 +22,14 @@ async function bootstrap() {
         level: 'info',
         transport: isDevelopment
           ? {
-              target: 'pino-pretty',
-              options: {
-                colorize: true,
-                translateTime: 'yyyy-mm-dd HH:MM:ss',
-                ignore: 'pid,hostname',
-                singleLine: false,
-              },
-            }
+            target: 'pino-pretty',
+            options: {
+              colorize: true,
+              translateTime: 'yyyy-mm-dd HH:MM:ss',
+              ignore: 'pid,hostname',
+              singleLine: false,
+            },
+          }
           : undefined,
       },
     });

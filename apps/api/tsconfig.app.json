@@ -22,13 +22,19 @@
   ],
   "references": [
     {
-      "path": "../../libs/core/config"
+      "path": "../../libs/core/auth"
     },
     {
       "path": "../../libs/core/database"
     },
     {
+      "path": "../../libs/core/config"
+    },
+    {
       "path": "../../libs/core/logger"
+    },
+    {
+      "path": "../../libs/features/system/auth"
     }
   ]
 }
